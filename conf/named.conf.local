@@ -1,0 +1,1 @@
+include "/etc/bind/conf/zones/example.com/zone";

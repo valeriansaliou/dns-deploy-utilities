@@ -1,0 +1,49 @@
+;
+; @server {multiple}
+; @host example.com
+; @desc BIND database file
+; @author Valerian Saliou <valerian@valeriansaliou.name>
+;
+
+$TTL  86400
+@ IN  SOA a.ns.server.tld. hostmaster.server.tld. (
+   2014100601   ; Serial (YYYYmmddss)
+        10800   ; Refresh
+         5400   ; Retry
+      2419200   ; Expire
+        86400 ) ; Negative Cache TTL
+;
+
+; Nameservers
+@   IN  NS    a.ns.server.tld.
+@   IN  NS    b.ns.server.tld.
+@   IN  NS    c.ns.server.tld.
+@   IN  NS    d.ns.server.tld.
+
+; Base
+@   IN  A      95.142.175.37
+@   IN  AAAA   2001:4b98:dc0:51:216:3eff:fe5d:90a1
+
+; Web
+www  IN  CNAME   @
+
+; Email
+imap  IN  CNAME   access.mail.server.tld.
+pop   IN  CNAME   access.mail.server.tld.
+smtp  IN  CNAME   relay.mail.server.tld.
+
+; Mail Exchange
+@   IN  MX  50  fb.mail.server.tld.
+@   IN  MX  10  spool.mail.server.tld.
+
+; Sender Policy Framework (TXT)
+@   IN  SPF  "v=spf1 include:_mailcust.server.tld ?all"
+@   IN  TXT  "v=spf1 include:_mailcust.server.tld ?all"
+
+; TLSA
+_443._tcp              IN   TLSA  3 1 1  7cd3768db96540d9c782d41e3cfba1503730574231c7e65b605a7d727501c1df
+_443._tcp.www          IN   TLSA  3 1 1  7cd3768db96540d9c782d41e3cfba1503730574231c7e65b605a7d727501c1df
+
+; DNSSEC
+$INCLUDE /var/lib/bind/keys/example.com/Kexample.com.+007+07034.key
+$INCLUDE /var/lib/bind/keys/example.com/Kexample.com.+007+23571.key

@@ -1,0 +1,12 @@
+;
+; @server {multiple}
+; @host example.com
+; @desc BIND zone file
+; @author Valerian Saliou <valerian@valeriansaliou.name>
+;
+
+zone "example.com" {
+  type master;
+  file "/etc/bind/build/zones/example.com/db.signed";
+  allow-query { any; };
+};

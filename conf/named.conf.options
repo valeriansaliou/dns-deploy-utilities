@@ -1,0 +1,15 @@
+options {
+  directory "/var/cache/bind";
+
+  dnssec-enable yes;
+  dnssec-validation yes;
+  dnssec-lookaside auto;
+
+  auth-nxdomain no;
+
+  listen-on { any; };
+  listen-on-v6 { any; };
+
+  recursion no;
+  version "BIND";
+};
